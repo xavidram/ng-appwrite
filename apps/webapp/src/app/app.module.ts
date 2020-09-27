@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CoreModule } from '@ng-appwrite/core';
 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
@@ -23,6 +24,7 @@ import { RouterModule } from '@angular/router';
       }, 
       { path: '**', redirectTo: '404', pathMatch: 'full' }
     ]),
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent],

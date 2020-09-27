@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NgxsModule } from '@ngxs/store';
@@ -16,6 +16,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { AppwriteInterceptor } from './interceptors/appwrite.interceptor';
 import { WINDOW, _window } from './services/window.token';
 import { CustomRouterStateSerializer } from './handlers/custom-router-state.serializer';
+import { AppHandler } from './handlers/app.handler';
 
 @NgModule({
   imports: [
@@ -45,4 +46,19 @@ import { CustomRouterStateSerializer } from './handlers/custom-router-state.seri
     { provide: WINDOW, useFactory: _window },
   ]
 })
-export class CoreModule {}
+export class CoreModule {
+  constructor(
+    @Optional()
+    @SkipSelf()
+    parentModule: CoreModule,
+    // HINT: AppHandler is injected here to initialize it as Module Run Block,
+    // APP_INITIALIZER is not an option when target to es2015
+    // https://github.com/ngxs/store/issues/773
+    appHandler: AppHandler
+  ) {
+
+    if (parentModule) {
+      throw new Error('CoreModule is already loaded. Import it in the AppModule only');
+    }
+  }
+}

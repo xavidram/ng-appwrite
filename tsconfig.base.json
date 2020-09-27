@@ -1,20 +1,21 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": ".",
+    "baseUrl": ".",
+    "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    "downlevelIteration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "module": "es2020",
+    "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "module": "esnext",
     "typeRoots": ["node_modules/@types"],
-    "lib": ["es2017", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
+    "lib": ["dom", "es2019"],
+    "resolveJsonModule": true,
+    "rootDir": ".",
     "paths": {
       "@env/*": ["apps/webapp/src/environments/*"],
       "@ng-appwrite/core": ["libs/core/src/index.ts"],
@@ -26,6 +27,11 @@
       "@ng-appwrite/not-found": ["libs/not-found/src/index.ts"],
       "@ng-appwrite/shared": ["libs/shared/src/index.ts"]
     }
+  },
+  "angularCompilerOptions": {
+    "disableTypeScriptVersionCheck": true,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
   },
   "exclude": ["node_modules", "tmp"]
 }
