@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
 import { AuthState } from './state/auth.state';
 import { AuthHandler } from './handlers/auth.handler';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   imports: [
@@ -23,6 +25,10 @@ import { AuthHandler } from './handlers/auth.handler';
     ])
   ],
   declarations: [LoginFormComponent, LoginComponent],
+  providers: [
+    AuthService,
+    AuthGuard
+  ]
 })
 export class AuthModule {
   static forRoot(): ModuleWithProviders<AuthModule> {

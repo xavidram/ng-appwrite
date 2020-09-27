@@ -4,6 +4,8 @@ import { CoreModule } from '@ng-appwrite/core';
 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
+/** Circular Dependency due to import of @environmetn variable in appwrite service in shared */
+import { AuthGuard } from '@ng-appwrite/auth';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +19,7 @@ import { RouterModule } from '@angular/router';
           import('@ng-appwrite/home').then((module) => module.HomeModule),
       }, {
         path: 'dashboard',
+        canActivate: [AuthGuard],
         loadChildren: () => import('@ng-appwrite/dashboard').then(module => module.DashboardModule)
       }, {
         path: '404',
