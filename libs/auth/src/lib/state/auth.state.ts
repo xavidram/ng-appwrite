@@ -1,4 +1,4 @@
-import { NgZone } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { State, Selector, Action, StateContext, NgxsAfterBootstrap } from '@ngxs/store';
 import { AuthError } from '../models/auth-error';
@@ -13,6 +13,9 @@ import { Login, LoginCanceled, LoginFailed, LoginRedirect, LoginSuccess, Logout,
         profile: null,
         error: null
     }
+})
+@Injectable({
+  providedIn: 'root'
 })
 export class AuthState implements NgxsAfterBootstrap {
 

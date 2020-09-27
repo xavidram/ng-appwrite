@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import * as Appwrite from 'appwrite';
 // tslint:disable-next-line: nx-enforce-module-boundaries
 import { environment } from '@env/environment';
@@ -6,11 +6,13 @@ import { environment } from '@env/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AppwriteService {
+export class AppwriteService implements OnInit {
 
   public sdk: Appwrite;
 
-  constructor() {
+  constructor() { }
+
+  ngOnInit() {
     this.sdk.setEndpoint(environment.appwriteEndpoint).setProject(environment.appwriteProjectID);
   }
 
