@@ -14,6 +14,7 @@ export class AppwriteService implements OnInit {
 
   ngOnInit() {
     this.sdk.setEndpoint(environment.appwriteEndpoint).setProject(environment.appwriteProjectID);
+    console.log(this.sdk);
   }
 
   get account() {
