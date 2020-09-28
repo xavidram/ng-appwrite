@@ -17,6 +17,7 @@ export class AuthService {
 
   async login(credentials: ILoginCredentials) {
       try {
+        debugger;
         const newSession = await this.appwrite.account.createSession(credentials.email, credentials.password);
         console.log(newSession);
         if(newSession) {
