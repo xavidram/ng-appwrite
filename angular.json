@@ -33,9 +33,7 @@
                 "output": "assets/not-found"
               }
             ],
-            "styles": [
-              "apps/webapp/src/styles.scss"
-            ],
+            "styles": ["apps/webapp/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -96,10 +94,7 @@
               "apps/webapp/tsconfig.app.json",
               "apps/webapp/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/webapp/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/webapp/**/*"]
           }
         },
         "test": {
@@ -132,13 +127,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/webapp-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/webapp-e2e/**/*"
-            ]
+            "tsConfig": ["apps/webapp-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/webapp-e2e/**/*"]
           }
         }
       }
@@ -156,10 +146,7 @@
               "libs/core/tsconfig.lib.json",
               "libs/core/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/core/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/core/**/*"]
           }
         },
         "test": {
@@ -189,10 +176,7 @@
               "libs/auth/tsconfig.lib.json",
               "libs/auth/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/auth/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/auth/**/*"]
           }
         },
         "test": {
@@ -223,10 +207,7 @@
               "libs/topbar/tsconfig.spec.json",
               "libs/topbar/.storybook/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/topbar/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/topbar/**/*"]
           }
         },
         "test": {
@@ -286,10 +267,7 @@
               "libs/profile/tsconfig.lib.json",
               "libs/profile/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/profile/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/profile/**/*"]
           }
         },
         "test": {
@@ -319,10 +297,7 @@
               "libs/dashboard/tsconfig.lib.json",
               "libs/dashboard/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/dashboard/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/dashboard/**/*"]
           }
         },
         "test": {
@@ -352,10 +327,7 @@
               "libs/home/tsconfig.lib.json",
               "libs/home/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/home/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/home/**/*"]
           }
         },
         "test": {
@@ -386,10 +358,7 @@
               "libs/not-found/tsconfig.spec.json",
               "libs/not-found/.storybook/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/not-found/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/not-found/**/*"]
           }
         },
         "test": {
@@ -449,16 +418,43 @@
               "libs/shared/tsconfig.lib.json",
               "libs/shared/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/shared/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/shared/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "angular-appwrite": {
+      "projectType": "library",
+      "root": "libs/angular-appwrite",
+      "sourceRoot": "libs/angular-appwrite/src",
+      "prefix": "ng-appwrite",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/angular-appwrite/tsconfig.lib.json",
+              "libs/angular-appwrite/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/angular-appwrite/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/angular-appwrite/jest.config.js",
             "passWithNoTests": true
           }
         }
