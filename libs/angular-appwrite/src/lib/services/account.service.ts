@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
 import { IAppwriteAccount } from '../models/IAppwriteAccount.model';
+import { AppwriteService } from './appwrite.service';
 
-@Injectable()
-export class AppwriteAccount implements IAppwriteAccount {
-    constructor() {}
-
+export class AppwriteAccount extends AppwriteService implements IAppwriteAccount {
+    
     async create(email: string, password: string, name: string): Promise<any> {}
     async createSession(email: string, password: string): Promise<any> {}
     async createOAuth2Session(provider: string, success?: string, failure?: string): Promise<any> {}
