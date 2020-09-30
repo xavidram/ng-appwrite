@@ -1,4 +1,4 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgModule, OnInit, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NgxsModule } from '@ngxs/store';
@@ -17,6 +17,8 @@ import { AppwriteInterceptor } from './interceptors/appwrite.interceptor';
 import { WINDOW, _window } from './services/window.token';
 import { CustomRouterStateSerializer } from './handlers/custom-router-state.serializer';
 import { AppHandler } from './handlers/app.handler';
+import { AppwriteClient } from '@ng-appwrite/angular-appwrite';
+import { environment } from '@env/environment';
 
 @NgModule({
   imports: [

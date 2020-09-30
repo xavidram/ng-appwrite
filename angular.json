@@ -435,36 +435,6 @@
         }
       }
     },
-    "angular-appwrite": {
-      "projectType": "library",
-      "root": "libs/angular-appwrite",
-      "sourceRoot": "libs/angular-appwrite/src",
-      "prefix": "ng-appwrite",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/angular-appwrite/tsconfig.lib.json",
-              "libs/angular-appwrite/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/angular-appwrite/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/angular-appwrite/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      }
-    }
   },
   "cli": {
     "defaultCollection": "@nrwl/angular"

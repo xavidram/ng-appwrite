@@ -25,8 +25,7 @@
       "@ng-appwrite/dashboard": ["libs/dashboard/src/index.ts"],
       "@ng-appwrite/home": ["libs/home/src/index.ts"],
       "@ng-appwrite/not-found": ["libs/not-found/src/index.ts"],
-      "@ng-appwrite/shared": ["libs/shared/src/index.ts"],
-      "@ng-appwrite/angular-appwrite": ["libs/angular-appwrite/src/index.ts"]
+      "@ng-appwrite/shared": ["libs/shared/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

@@ -1,10 +1,14 @@
 import * as request from 'request-promise-native';
+import { Injectable } from '@angular/core';
 
 interface assoc {
   [key: string]: any;
 }
 
-export class Client {
+@Injectable({
+  providedIn: 'root'
+})
+export class AppwriteClient {
   endpoint: string = 'https://appwrite.io/v1';
   headers: assoc = {
     'content-type': '',

@@ -5,20 +5,20 @@
  * repo: https://github.com/aw-tests/sdk-for-typescript
  * */
 
-import { Client } from "./lib/client";
-import { Account } from "./lib/services/account.service";
-import { Avatars } from "./lib/services/avatars.service";
-import { Database } from "./lib/services/database.service";
-import { Locale } from "./lib/services/locale.service";
-import { Storage } from "./lib/services/storage.service";
-import { Teams } from "./lib/services/teams.service";
+import { AppwriteClient } from "./lib/client";
+import { AppwriteAccount } from "./lib/services/account.service";
+import { AppwriteAvatars } from "./lib/services/avatars.service";
+import { AppwriteDatabase } from "./lib/services/database.service";
+import { AppwriteLocale } from "./lib/services/locale.service";
+import { AppwriteStorage } from "./lib/services/storage.service";
+import { AppwriteTeams } from "./lib/services/teams.service";
 
 export {
-    Client,
-    Account,
-    Avatars,
-    Database,
-    Locale,
-    Storage,
-    Teams,
+    AppwriteClient,
+    AppwriteAccount,
+    AppwriteAvatars,
+    AppwriteDatabase,
+    AppwriteLocale,
+    AppwriteStorage,
+    AppwriteTeams,
 };

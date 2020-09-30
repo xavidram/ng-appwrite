@@ -1,10 +1,10 @@
-import { Service } from '../service';
+import { AppwriteService } from '../service';
 
 interface assoc {
   [key: string]: any;
 }
 
-export class Teams extends Service {
+export class AppwriteTeams extends AppwriteService {
   /**
    * List Teams
    *

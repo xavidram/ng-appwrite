@@ -1,10 +1,10 @@
-import { Service } from '../service';
+import { AppwriteService } from '../service';
 
 interface assoc {
   [key: string]: any;
 }
 
-export class Avatars extends Service {
+export class AppwriteAvatars extends AppwriteService {
   /**
    * Get Browser Icon
    *

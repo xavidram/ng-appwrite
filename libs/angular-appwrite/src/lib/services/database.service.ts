@@ -1,10 +1,10 @@
-import { Service } from '../service';
+import { AppwriteService } from '../service';
 
 interface assoc {
   [key: string]: any;
 }
 
-export class Database extends Service {
+export class AppwriteDatabase extends AppwriteService {
   /**
    * List Documents
    *

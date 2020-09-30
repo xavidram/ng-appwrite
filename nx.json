@@ -58,9 +58,6 @@
     },
     "shared": {
       "tags": []
-    },
-    "angular-appwrite": {
-      "tags": []
     }
   }
 }

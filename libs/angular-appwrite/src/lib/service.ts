@@ -1,12 +1,16 @@
-import { Client } from './client';
+import { Injectable } from '@angular/core';
+import { AppwriteClient } from './client';
 
-export class Service {
-  client: Client;
+@Injectable({
+  providedIn: 'root'
+})
+export class AppwriteService {
+  client: AppwriteClient;
 
   /**
    * @param client
    */
-  constructor(client: Client) {
+  constructor(client: AppwriteClient) {
     this.client = client;
   }
 }

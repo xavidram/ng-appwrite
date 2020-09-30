@@ -1,11 +1,11 @@
 import { IAppwriteAccount } from '../models/IAppwriteAccount.model';
-import { Service } from '../service';
+import { AppwriteService } from '../service';
 
 interface assoc {
   [key: string]: any;
 }
 
-export class Account extends Service implements IAppwriteAccount {
+export class AppwriteAccount extends AppwriteService implements IAppwriteAccount {
 
   /**
    * Get Account
