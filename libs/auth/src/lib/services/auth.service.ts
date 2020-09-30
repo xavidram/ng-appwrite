@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AppwriteService } from '@ng-appwrite/shared';
 import { AuthError } from '../models/auth-error';
 import { ILoginCredentials } from '../models/login-creds';
+import { AppwriteService } from '@ng-appwrite/shared'
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -9,7 +9,7 @@ export class AuthService {
 
   async fetchUser() {
       try {
-        return await this.appwrite.sdk.account.get();
+        return await this.appwrite.client.account.get();
       } catch (e) {
           throw new AuthError(e.message, 401);
       }
@@ -17,7 +17,7 @@ export class AuthService {
 
   async login(credentials: ILoginCredentials) {
       try {
-        const newSession = await this.appwrite.sdk.account.createSession(credentials.email, credentials.password);
+        const newSession = await this.appwrite.client.account.createSession(credentials.email, credentials.password);
         console.log(newSession);
         if(newSession) {
             return await this.fetchUser();

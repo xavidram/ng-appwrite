@@ -1,43 +1,21 @@
 import { Injectable, OnInit } from '@angular/core';
-import * as Appwrite from 'appwrite';
-// tslint:disable-next-line: nx-enforce-module-boundaries
 import { environment } from '@env/environment';
+import * as Appwrite from 'appwrite';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AppwriteService implements OnInit {
 
-  public sdk: Appwrite;
+    public client: Appwrite;
 
-  constructor() { }
+    constructor() {
+        this.client = new Appwrite();
+        this.client.setEndpoint(environment.appwriteEndpoint).setProject(environment.appwriteProjectID);
+    }
 
-  ngOnInit() {
-    this.sdk.setEndpoint(environment.appwriteEndpoint).setProject(environment.appwriteProjectID);
-    console.log(this.sdk);
-  }
-
-  get account() {
-    return this.sdk.account;
-  }
-
-  get avatars() {
-    return this.sdk.avatars;
-  }
-
-  get database() {
-    return this.sdk.database;
-  }
-
-  get locale() {
-    return this.sdk.locale;
-  }
-
-  get storage() {
-    return this.sdk.storage;
-  }
-
-  get teams() {
-    return this.sdk.teams;
-  }
+    ngOnInit() {
+        
+    }
+    
 }

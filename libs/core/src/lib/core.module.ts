@@ -17,7 +17,6 @@ import { AppwriteInterceptor } from './interceptors/appwrite.interceptor';
 import { WINDOW, _window } from './services/window.token';
 import { CustomRouterStateSerializer } from './handlers/custom-router-state.serializer';
 import { AppHandler } from './handlers/app.handler';
-import { AppwriteClient } from '@ng-appwrite/angular-appwrite';
 import { environment } from '@env/environment';
 
 @NgModule({
