@@ -31,9 +31,9 @@ export class AuthService {
 
   async logout() {
       try {
-          /*
-        const session = await this.appwrite.account.get();
-        await this.appwrite.account.deleteSession(session.sessionId);
+        /*
+        const session = await this.appwrite.client.account.get();
+        await this.appwrite.client.account.deleteSession(session.$id);
         */
       } catch (e) {
 

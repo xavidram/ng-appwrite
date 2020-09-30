@@ -41,7 +41,13 @@ export class AuthState implements NgxsAfterBootstrap {
         return !!state.profile;
     }
 
-    ngxsAfterBootstrap() {}
+    async ngxsAfterBootstrap(ctx: StateContext<IAuthStateModel>) {
+      const user = await this.auth.fetchUser();
+      console.log(user)
+      if(user) {
+        ctx.dispatch(new LoginSuccess(user));
+      }
+    }
 
     
   @Action(LoginSuccess)
@@ -96,7 +102,6 @@ export class AuthState implements NgxsAfterBootstrap {
     ctx.patchState({ error: undefined, pending: true });
     return this.zone.run(() => {
       this.auth.login(credentials).then((profile:any) => {
-        console.log(profile);
         ctx.dispatch(new LoginSuccess(profile));
       }).catch((error: AuthError) => ctx.dispatch(new LoginFailed(error)))
     });
