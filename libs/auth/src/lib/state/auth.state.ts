@@ -54,7 +54,7 @@ export class AuthState implements NgxsAfterBootstrap {
       error: null,
       pending: false
     });
-    this.zone.run(() => this.router.navigate(['/app']));
+    this.zone.run(() => this.router.navigate(['/dashboard']));
   }
 
   @Action([LogoutSuccess, LoginCanceled])
