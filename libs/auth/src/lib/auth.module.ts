@@ -1,4 +1,4 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LoginFormComponent } from './components/login-form/login-form.component';
@@ -9,6 +9,7 @@ import { AuthState } from './state/auth.state';
 import { AuthHandler } from './handlers/auth.handler';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
+
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { AuthGuard } from './guards/auth.guard';
   providers: [
     AuthService,
     AuthGuard
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AuthModule {
   static forRoot(): ModuleWithProviders<AuthModule> {

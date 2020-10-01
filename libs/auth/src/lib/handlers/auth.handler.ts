@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Actions, ofActionErrored, ofActionSuccessful } from '@ngxs/store';
-import { Login } from '../state/auth.actions';
+import { Actions, ofActionCompleted, ofActionDispatched, ofActionErrored, ofActionSuccessful } from '@ngxs/store';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Login, LoginCanceled, LoginFailed, LoginSuccess } from '../state/auth.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthHandler {
-  constructor(private actions$: Actions) {
-    this.actions$.pipe(ofActionSuccessful(Login)).subscribe(action => console.log('Login........Action Successful'));
-    this.actions$.pipe(ofActionErrored(Login)).subscribe(action => console.log('Login........Action Errored'));
-    // this.actions$.pipe(ofActionDispatched(Logout)).subscribe(() => {this.router.navigate(['/login']);
+  constructor(private actions$: Actions, private spinner: NgxSpinnerService) {
+    // Show Spinner on login
+    this.actions$.pipe(ofActionDispatched(Login)).subscribe(() => {
+      this.spinner.show();
+    });
+    // Hide spinnter
+    this.actions$.pipe(ofActionCompleted(LoginSuccess, LoginCanceled, LoginFailed)).subscribe(() => {
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 500);
+    })
   }
 }

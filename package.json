@@ -44,6 +44,7 @@
     "@ngxs/store": "^3.7.0",
     "@nrwl/angular": "10.2.1",
     "appwrite": "^1.1.0",
+    "ngx-spinner": "^10.0.1",
     "request-promise-native": "^1.0.9",
     "rxjs": "~6.5.5",
     "zone.js": "^0.10.2"

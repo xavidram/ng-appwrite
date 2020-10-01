@@ -6,6 +6,8 @@ import { IAuthStateModel } from '../models/state-model';
 import { AuthService } from '../services/auth.service';
 import { Login, LoginCanceled, LoginFailed, LoginRedirect, LoginSuccess, Logout, LogoutSuccess } from './auth.actions';
 
+import { NgxSpinnerService } from "ngx-spinner";
+
 @State<IAuthStateModel>({
     name: 'auth',
     defaults: {
@@ -19,7 +21,12 @@ import { Login, LoginCanceled, LoginFailed, LoginRedirect, LoginSuccess, Logout,
 })
 export class AuthState implements NgxsAfterBootstrap {
 
-    constructor(private router: Router, private zone: NgZone, private auth: AuthService) {}
+    constructor(
+      private router: Router,
+      private zone: NgZone,
+      private auth: AuthService,
+      private spiner: NgxSpinnerService
+    ) {}
 
     @Selector()
     static profile(state: IAuthStateModel) {
@@ -42,10 +49,17 @@ export class AuthState implements NgxsAfterBootstrap {
     }
 
     async ngxsAfterBootstrap(ctx: StateContext<IAuthStateModel>) {
-      const user = await this.auth.fetchUser();
-      console.log(user)
-      if(user) {
-        ctx.dispatch(new LoginSuccess(user));
+      try {
+        const user = await this.auth.fetchUser();
+        if(user) {
+          ctx.dispatch(new LoginSuccess(user));
+        } else {
+          ctx.dispatch(new LoginFailed('Session Expired!'));
+        }
+      } catch (e) {
+        if (e instanceof AuthError) {
+          console.log(e);
+        }
       }
     }
 

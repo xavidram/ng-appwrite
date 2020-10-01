@@ -11,7 +11,7 @@ export class AuthService {
       try {
         return await this.appwrite.client.account.get();
       } catch (e) {
-          throw new AuthError(e.message, 401);
+        return null;
       }
   }
 
