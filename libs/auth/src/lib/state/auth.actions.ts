@@ -1,3 +1,4 @@
+import { AuthError } from '../models/auth-error';
 import { ILoginCredentials } from '../models/login-creds';
 
 export class Login {
@@ -29,4 +30,26 @@ export class LoginCanceled {
 
 export class LoginRedirect {
     static readonly type = '[Auth] Login Redirect';
+}
+
+export class RegisterRedirect {
+    static readonly type = '[Auth] Register Redirect';
+}
+
+export class RegisterSuccess {
+    static readonly type = '[Auth] Register Success'
+}
+
+export class RegisterFailed {
+    static readonly type = '[Auth] Register Failed'
+    constructor(public error: AuthError) {}
+}
+
+export class RegisterCanceled {
+    static readonly type = '[Auth] Register Canceled'
+}
+
+export class Register {
+    static readonly type = '[Auth] Register'
+    constructor(public payload:{ email: string, name: string, password: string }) {}
 }

@@ -1,69 +1,93 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { State, Selector, Action, StateContext, NgxsAfterBootstrap } from '@ngxs/store';
+import {
+  State,
+  Selector,
+  Action,
+  StateContext,
+  NgxsAfterBootstrap,
+} from '@ngxs/store';
 import { AuthError } from '../models/auth-error';
 import { IAuthStateModel } from '../models/state-model';
 import { AuthService } from '../services/auth.service';
-import { Login, LoginCanceled, LoginFailed, LoginRedirect, LoginSuccess, Logout, LogoutSuccess } from './auth.actions';
+import {
+  Login,
+  LoginCanceled,
+  LoginFailed,
+  LoginRedirect,
+  LoginSuccess,
+  Logout,
+  LogoutSuccess,
+  Register,
+  RegisterFailed,
+  RegisterRedirect,
+  RegisterSuccess,
+} from './auth.actions';
 
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @State<IAuthStateModel>({
-    name: 'auth',
-    defaults: {
-        pending: false,
-        profile: null,
-        error: null
-    }
+  name: 'auth',
+  defaults: {
+    pending: false,
+    profile: null,
+    error: null,
+  },
 })
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthState implements NgxsAfterBootstrap {
+  constructor(
+    private router: Router,
+    private zone: NgZone,
+    private auth: AuthService,
+    private spiner: NgxSpinnerService
+  ) {}
 
-    constructor(
-      private router: Router,
-      private zone: NgZone,
-      private auth: AuthService,
-      private spiner: NgxSpinnerService
-    ) {}
+  @Selector()
+  static profile(state: IAuthStateModel) {
+    return state.profile;
+  }
 
-    @Selector()
-    static profile(state: IAuthStateModel) {
-        return state.profile;
-    }
+  @Selector()
+  static isPending(state: IAuthStateModel) {
+    return state.pending;
+  }
 
-    @Selector()
-    static isPending(state: IAuthStateModel) {
-        return state.pending;
-    }
+  @Selector()
+  static authError(state: IAuthStateModel) {
+    return state.error;
+  }
 
-    @Selector()
-    static authError(state: IAuthStateModel) {
-        return state.error;
-    }
+  @Selector()
+  static isLoggedIn(state: IAuthStateModel) {
+    return !!state.profile;
+  }
 
-    @Selector()
-    static isLoggedIn(state: IAuthStateModel) {
-        return !!state.profile;
-    }
-
-    async ngxsAfterBootstrap(ctx: StateContext<IAuthStateModel>) {
-      try {
-        const user = await this.auth.fetchUser();
-        if(user) {
-          ctx.dispatch(new LoginSuccess(user));
-        } else {
-          ctx.dispatch(new LoginFailed('Session Expired!'));
-        }
-      } catch (e) {
-        if (e instanceof AuthError) {
-          console.log(e);
-        }
+  async ngxsAfterBootstrap(ctx: StateContext<IAuthStateModel>) {
+    try {
+      const user = await this.auth.fetchUser();
+      if (user) {
+        ctx.patchState({
+          profile: user,
+          error: null,
+          pending: false,
+        });
+      } else {
+        ctx.patchState({
+          profile: null,
+          error: null,
+          pending: false,
+        });
+      }
+    } catch (e) {
+      if (e instanceof AuthError) {
+        console.log(e);
       }
     }
+  }
 
-    
   @Action(LoginSuccess)
   onLoginSuccess(
     { getState, patchState }: StateContext<IAuthStateModel>,
@@ -72,7 +96,7 @@ export class AuthState implements NgxsAfterBootstrap {
     patchState({
       profile: payload,
       error: null,
-      pending: false
+      pending: false,
     });
     this.zone.run(() => this.router.navigate(['/dashboard']));
   }
@@ -82,7 +106,7 @@ export class AuthState implements NgxsAfterBootstrap {
     patchState({
       profile: null,
       error: null,
-      pending: false
+      pending: false,
     });
     this.zone.run(() => this.router.navigate(['/login']));
   }
@@ -95,7 +119,7 @@ export class AuthState implements NgxsAfterBootstrap {
     patchState({
       profile: null,
       error,
-      pending: false
+      pending: false,
     });
     this.zone.run(() => this.router.navigate(['/login']));
   }
@@ -115,9 +139,46 @@ export class AuthState implements NgxsAfterBootstrap {
   login(ctx: StateContext<IAuthStateModel>, { credentials }: Login) {
     ctx.patchState({ error: undefined, pending: true });
     return this.zone.run(() => {
-      this.auth.login(credentials).then((profile:any) => {
-        ctx.dispatch(new LoginSuccess(profile));
-      }).catch((error: AuthError) => ctx.dispatch(new LoginFailed(error)))
+      this.auth
+        .login(credentials)
+        .then((profile: any) => {
+          ctx.dispatch(new LoginSuccess(profile));
+        })
+        .catch((error: AuthError) => ctx.dispatch(new LoginFailed(error)));
     });
+  }
+
+  /** Register Actions */
+  @Action(RegisterRedirect)
+  registerRedirect(ctx: StateContext<IAuthStateModel>) {
+    this.zone.run(() => this.router.navigate(['/register']))
+  }
+
+  @Action(Register)
+  register(ctx: StateContext<IAuthStateModel>, { payload }: Register) {
+    ctx.patchState({ error: undefined, pending: true});
+    return this.zone.run(() => {
+      /** TODO: Implement register */
+    })
+  }
+
+  @Action(RegisterSuccess)
+  registerSuccess(ctx: StateContext<IAuthStateModel>) {
+    ctx.patchState({
+      profile: null,
+      error: undefined,
+      pending: false,
+    });
+    ctx.dispatch(new LoginRedirect());
+  }
+
+  @Action(RegisterFailed)
+  registerFailed(ctx: StateContext<IAuthStateModel>, { error }: RegisterFailed) {
+    ctx.patchState({
+      profile: null,
+      error: error,
+      pending: false,
+    });
+    ctx.dispatch(new RegisterRedirect());
   }
 }

@@ -9,6 +9,9 @@ import { AuthState } from './state/auth.state';
 import { AuthHandler } from './handlers/auth.handler';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
+import { RegisterComponent } from './containers/register/register.component';
+import { RegisterFormComponent } from './components/register-form/register-form.component';
+import { RegistrationSuccessfullComponent } from './containers/registration-successfull/registration-successfull.component';
 
 
 @NgModule({
@@ -22,10 +25,14 @@ import { AuthGuard } from './guards/auth.guard';
         path: 'login',
         component: LoginComponent,
         data: { title: 'Login' }
+      }, {
+        path: 'register',
+        component: RegisterComponent,
+        data: { title: 'Register' }
       }
     ])
   ],
-  declarations: [LoginFormComponent, LoginComponent],
+  declarations: [LoginFormComponent, LoginComponent, RegisterComponent, RegisterFormComponent, RegistrationSuccessfullComponent],
   providers: [
     AuthService,
     AuthGuard

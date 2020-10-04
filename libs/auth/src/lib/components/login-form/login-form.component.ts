@@ -11,7 +11,7 @@ import { AuthState } from '../../state/auth.state';
 @Component({
   selector: 'ng-appwrite-login-form',
   template: `
-    <div class="leading-normal flex flex-col p-6 bg-white rounded-lg">
+    <div class="leading-normal flex flex-col p-6 bg-white rounded-lg shadow-lg">
       <div class="login-header flex flex-row my-6">
         <img src="assets/appwrite.svg" alt="Appwrite login logo" class="h-8 w-full">
       </div>
@@ -22,7 +22,7 @@ import { AuthState } from '../../state/auth.state';
           </div>
           <!-- Email input -->
           <div class="form-control flex flex-col my-2">
-            <input class="px-4 py-2 bg-gray-200" type="email" formControlName="email" placeholder="Email" />
+            <input class="px-4 py-2 bg-gray-300" type="email" formControlName="email" placeholder="Email" />
             <div *ngIf="submitted && f.email.errors" class="">
               <small class="text-red-600" *ngIf="f.email.errors.required">Email is Required!</small>
             </div>
@@ -38,7 +38,7 @@ import { AuthState } from '../../state/auth.state';
           <div class="mt-2">
             <button class="bg-appwrite text-white px-4 py-2 w-full" type="submit">Login</button>
             <div class="flex justify-center items-center mt-4">
-              <a class="cursor-pointer" routerLink="/register">Dont have an Account?</a>
+              <a class="cursor-pointer shadow-sm text-gray-700 hover:text-black" routerLink="/register">Dont have an Account?</a>
             </div>
           </div>
         </form>
